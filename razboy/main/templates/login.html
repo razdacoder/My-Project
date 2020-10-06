@@ -1,0 +1,32 @@
+{%  extends "base.html" %}
+{% block title %} Login {% endblock %}
+{% block con %}r{% endblock %}
+{% block content %}
+
+    <section class="form-section">
+      <form class="login-form" action="" method="post" accept-charset="utf-8">
+          {% csrf_token %}
+        <h3 class="form-heading">Login Here</h3>
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert error ">
+                  <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+          <input type="email" placeholder="Email" required name="email" >
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" required name="password">
+        </div>
+        {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+        {% endif %}
+        <div class="form-group">
+          <button type="submit" class="btn-submit">Login</button>
+        </div>
+      </form>
+    </section>
+
+{% endblock %}

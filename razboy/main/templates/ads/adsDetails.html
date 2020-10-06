@@ -1,0 +1,57 @@
+{%  extends "base.html" %}
+{% block title %} {{ ad.title }} {% endblock %}
+{% block con %}r{% endblock %}
+{% block content %}
+
+    <section class="details-container">
+     <div class="details-images">
+       <div class="image-list">
+         {% for image in images %}
+             <figure class="image-fig">
+               <img class="img-list" src="{{ image.image.url }}" alt="{{ ad.title }}" />
+             </figure>
+         {% endfor %}
+       </div>
+       <div class="image-view">
+         <figure class="image-fig-view">
+           <img class="img-view" src="{{ images.0.image.url }}" alt="{{ ad.title }}" />
+         </figure>
+       </div>
+     </div>
+     <div class="details-info">
+       <div class="details-top">
+         <h3 class="details-title">{{ ad.title }}</h3>
+         <p class="details-big">
+           <span class="cur">&#8358;</span>
+           <span class="price">
+             {{ ad.price }}
+           </span>
+         </p>
+       </div>
+       <div class="details-body">
+         <a class="btn-like" href="#">
+           <i class="ion-ios-star-outline"></i>
+           <p class="likes-count">{{ ad.liked.all.count }}</p>
+         </a>
+         <div class="details-des">
+           <p class="text">
+            {{ ad.description }}   
+            </p>
+         </div>
+       </div>
+       <div class="details-bottom">
+         <div class="seller-info">
+           <img class="seller-img" src="{{ ad.user.photo.url }}" alt="{{ ad.user.fullname }}" />
+           <h5 class="seller-name">{{ ad.user.fullname }}</h5>
+         </div>
+         <button class="btn-chat" type="submit">Contact</button>
+       </div>
+     </div>
+   </section>
+   <script type="text/javascript" charset="utf-8">
+       const fig = document.querySelectorAll(".image-fig");
+       fig[0].style.paddingTop = '0rem';
+       fig[4].style.paddingBottom = '0rem'
+   </script>
+
+{% endblock %}

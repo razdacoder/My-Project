@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+
+  <title>
+      {% block title %}
+          RD - 
+      {% endblock %}
+  </title>
+  
+   <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  
+  <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+  <div class="container{% block con %}Replace This{% endblock %}">
+     <nav class="navigation">
+       
+       <div class="logo-box">
+         <a class="logo" href="#">
+           RD
+         </a>
+       </div>
+       <div class="nav-links">
+         <a class="links" href="#">Blog</a>
+         <a class="links" href="#">Get Artisan</a>
+         <a class="links" href="{% url 'ads' %}">Ads</a>
+         <a class="links" href="#contact-section">Contact Us</a>
+       </div>
+       <form class="search-box">
+         <i class="ion-search"></i>
+         <input type="text" placeholder="Search Ads, Post and Artisan in Ilaro" />
+       </form>
+       {% if request.user.is_authenticated == False %}
+           <div class="nav-btn-group">
+             <a class="nav-btn full" href="{% url 'login' %}">Login</a>
+             <a class="nav-btn ghost" href="{% url 'register' %}">Sign Up</a>
+           </div>
+       {% else %}
+           <div class="nav-btn-group">
+             <a class="btn-line" href="{% url 'login' %}">{{ request.user.get_name }}</a>
+             <a class="btn-line" href="{% url 'logout' %}">Logout</a>
+           </div>
+       {% endif %}
+       
+     </nav>
+     
+      {% block content %}
+          Something goes here...
+      {% endblock %}
+     
+     
+     <footer class="footer">
+      <div class="footer-box">
+        <h2 class="footer-heading">
+           About Us
+        </h2>
+        <p class="footer-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius pharetra lorem, nec suscipit nulla malesuada ac. Maecenas varius leo mauris, vel ultrices elit ultrices at
+        </p>
+      </div>
+      <div class="footer-bottom">
+        <a class="social" href="#">
+          <i class="ion-social-facebook"></i>
+        </a>
+        <a class="social" href="#">
+          <i class="ion-social-twitter"></i>
+        </a>
+        <a class="social" href="#">
+          <i class="ion-social-github"></i>
+        </a>
+      </div>
+      <p class="footer-text copy">
+        &copy;
+        <script type="text/javascript" charset="utf-8">
+          const date = new Date()
+          const year = date.getFullYear()
+          document.write(year)
+        </script>
+      </p>
+     </footer>
+ </div>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+{%  extends "base.html" %}
+{% block title %} Login {% endblock %}
+{% block con %}r{% endblock %}
+{% block content %}
+
+     <div class="product-container">
+       <div class="row">
+       {% for ad in ads%}
+         <div class="ads-card">
+           <img class="ads-img" src="{{ ad.images.0.image.url }}" alt="Iphone 2" />
+           <form action="{% url 'like_ad' %}" method="post" accept-charset="utf-8">
+               {% csrf_token %}
+               <input type="hidden" name="ads_id"  value="{{ ad.ad.id }}" />
+               {% if request.user not in ad.ad.liked.all %}
+                   <button type="submit" class="btn-ad-like" >
+                       <i class="ion-ios-star-outline icon-star"></i>
+                   </button>
+               
+               {% else %}
+                   <button type="submit" class="btn-ad-like" >
+                       <i class="ion-ios-star icon-star"></i>
+                   </button>
+               {% endif %}
+           </form>
+           <h4 class="title">{{ ad.ad.title }}</h4>
+           <span>{{ ad.ad.liked.all.count }} Likes</span>
+           <div class="card-bottom">
+             <p class="sub-title">&#8358;{{ ad.ad.price }}</p>
+             <a class="btn btn-details" href="{% url 'ads_details' ad.ad.id %}">
+               Details
+               <i class="ion-ios-arrow-thin-right icon-btn"></i>
+             </a>
+           </div>
+         </div>
+         {% endfor %}
+       </div>
+     </div>
+     
+     <div class="pagination">
+         {% if ads.has_previous %}
+          <a href="?page=1" class="page">
+            <i class="ion-ios-arrow-left"></i>
+            <i class="ion-ios-arrow-left"></i>
+          </a>
+          <a href="?page={{ ads.previous_page_number }}" class="page">
+            <i class="ion-ios-arrow-left"></i>
+          </a>
+         {% endif %}
+      {% for num in ads.paginator.page_range %}
+          
+          {% if ads.number == num %}
+              <span class="page">
+                <strong>{{ num }}</strong>
+              </span>
+          {% elif num > ads.number|add:'-3' and num < ads.number|add:'3' %}
+                <a href="?page={{ num }}" class="page">
+                {{ num }}
+                </a>
+          {% endif %}
+          
+      {% endfor %}
+      
+      {% if ads.has_next %}
+       <a href="?page={{ ads.next_page_number }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+      </a>
+      <a href="?page={{ ads.paginator.num_pages }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+        <i class="ion-ios-arrow-right"></i>
+      </a>
+      {% endif %}
+    </div>
+
+{% endblock %}

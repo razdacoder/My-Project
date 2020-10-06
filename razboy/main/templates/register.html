@@ -1,0 +1,44 @@
+{%  extends "base.html" %}
+{% block title%} Register {% endblock %}
+{% block con %}r{% endblock %}
+{% block content %}
+
+<section class="form-section">
+      <form class="login-form" action="" method="post" accept-charset="utf-8">
+          {% csrf_token %}
+        <h3 class="form-heading">Register</h3>
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert error ">
+                  <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="form-group">
+          <input type="text" placeholder="Fullname" required name="fullname" />
+        </div>
+        
+        <div class="form-group">
+          <input type="email" placeholder="Email" required name=email />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="Phone Number" required name="number" />
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" required name="password1"/>
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Confirm Password" required name="password2" />
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn-submit">Register
+          </button>
+        </div>
+        <p class="form-text">
+          Already have an account?
+          <a class="form-link" href="{% url 'login' %}">Login</a>
+        </p>
+      </form>
+    </section>
+
+{% endblock %}
