@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>RD - {% block title %} {% endblock title %}</title>
+
+    <!-- HTML -->
+
+    <!-- Custom Styles -->
+
+    <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+
+  <body>
+    <div class="container{% block r %} Replace This {% endblock r %}">
+      <nav class="navigation">
+        <div class="logo-box">
+          <a class="logo" href="{% url 'home' %}"> RD </a>
+        </div>
+        <div class="nav-links">
+          <a class="links" href="#">Blog</a>
+          <a class="links" href="#">Get Artisan</a>
+          <a class="links" href="{% url 'ads' %}">Ads</a>
+          <a class="links" href="#contact-section">Contact Us</a>
+        </div>
+        <form class="search-box">
+          <i class="ion-search"></i>
+          <input
+            type="text"
+            placeholder="Search Ads, Post and Artisan in Ilaro"
+          />
+        </form>
+        
+        {% if request.user.is_authenticated %}
+          <div class="login-group">
+            <a class="" style="font-size: 1.5rem; text-transform: uppercase; margin-right: 2rem;" href="{% url 'login' %}">{{ request.user.get_name }}</a>
+            <a class="" style="font-size: 1.5rem; text-transform: uppercase;" href="{% url 'logout' %}">Logout</a>
+          </div>
+        {% else %}
+          <div class="nav-btn-group">
+            <a class="nav-btn full" href="{% url 'login' %}">Login</a>
+            <a class="nav-btn ghost" href="{% url 'register' %}">Sign Up</a>
+          </div>
+        {% endif %}
+          
+        
+      </nav>
+      {% block content %} Replace This {% endblock %}}
+
+      <footer class="footer">
+        <div class="footer-box">
+          <h2 class="footer-heading">About Us</h2>
+          <p class="footer-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius
+            pharetra lorem, nec suscipit nulla malesuada ac. Maecenas varius leo
+            mauris, vel ultrices elit ultrices at
+          </p>
+        </div>
+        <div class="footer-bottom">
+          <a class="social" href="#">
+            <i class="ion-social-facebook"></i>
+          </a>
+          <a class="social" href="#">
+            <i class="ion-social-twitter"></i>
+          </a>
+          <a class="social" href="#">
+            <i class="ion-social-github"></i>
+          </a>
+        </div>
+        <p class="footer-text copy">
+          &copy;
+          <script type="text/javascript" charset="utf-8">
+            const date = new Date();
+            const year = date.getFullYear();
+            document.write(year);
+          </script>
+        </p>
+      </footer>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

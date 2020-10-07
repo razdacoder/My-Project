@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ads
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<div class="product-container">
+    <div class="row">
+
+        {% for ad in data %}
+        <div class="ads-card">
+            <img class="ads-img" src="{{ ad.images.0.image.url }}" alt="Iphone 2" />
+
+
+            <h4 class="title">{{ ad.ad.title }}</h4>
+            <div class="card-bottom">
+                <p class="sub-title">&#8358;{{ ad.ad.price }}</p>
+                <a class="btn btn-details" href="{% url 'ads_details' ad.ad.id %}">
+                    Details
+                    {% comment %} <i class="ion-ios-arrow-thin-right icon-btn"></i> {% endcomment %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+</div>
+
+<div class="pagination">
+
+    {% if data.has_previous %}
+    <a href="?page=1" class="page">
+        <i class="ion-ios-arrow-left"></i>
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    <a href="?page={{ data.previous_page_number}}" class="page">
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    {% endif %}
+
+
+
+    {% for num in data.paginator.page_range %}
+
+    {% if data.number == num %}
+    <strong class="page">{{ num }}</strong>
+
+    {% elif num > data.number|add:'-3' and num < data.number|add:'3'%}
+    <a href="?page={{ num }}" class="page">{{ num }}</a>
+    {% endif %}
+
+    {% endfor %}
+
+
+    {% comment %} <a href="#" class="page">
+        1
+    </a>
+    <a href="#" class="page">
+        2
+    </a>
+    <a href="#" class="page">
+        3
+    </a> {% endcomment %}
+
+    {% if data.has_next %}
+    <a href="?page={{ data.next_page_number }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    <a href="?page={{ data.paginator.num_pages }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    {% endif %}
+
+</div>
+{% endblock content %}
