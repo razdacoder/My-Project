@@ -4,6 +4,7 @@ from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 from myAuth.views import *
 from main.views import *
@@ -17,11 +18,28 @@ urlpatterns = [
     path("login", login_view, name="login"),
     path("logout", logout_view, name="logout"),
 
+    path("password_reset/", auth_views.PasswordResetView.as_view(),
+         name="reset_password"),
+    path("password_reset_sent/", auth_views.PasswordResetDoneView.as_view(),
+         name="password_reset_done"),
+    path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(),
+         name="password_reset_confirm"),
+    path("password_reset_complete/",
+         auth_views.PasswordResetCompleteView.as_view(), name="password_reset_complete"),
 
-    # #Ads Routes
+
+    # Ads Routes
     path("ads/", ads_view, name="ads"),
     path("like_ads/<str:pk>/", ads_like_view, name="like_ad"),
     path("ads/<str:id>/", ads_details_view, name="ads_details"),
+    path("post_ad/", create_ad_view, name="create_ad"),
+
+    # Artisan Routes
+    path("artisans/", artisan_view, name="artisan"),
+    path("artisan_details/<str:id>/", artisan_detail_view, name="artisan_details"),
+
+
+
 
 
 

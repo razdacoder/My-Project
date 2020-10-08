@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ artisan.user.get_name }}
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<div class="artisan-header">
+    <img class="artisan-page-img" src="{{ images.0.image.url }}" alt="John Doe" />
+    <button class="artisan-page-like" href="#">
+        <i class="ion-ios-heart-outline"></i>
+    </button>
+    <div class="artisan-text-box">
+        <h3 class="artisan-box-name">
+            <span class="box-name-big">{{ artisan.user.fullname }}</span>
+            <span class="box-name-small">{{ artisan.job }}</span>
+        </h3>
+
+    </div>
+</div>
+<section class="artisan-features">
+    <div class="about">
+        <h3 class="about-head">About {{ artisan.user.get_name }}</h3>
+        <p class="about-text">
+            {{ artisan.about }}
+        </p>
+        <div class="about-contact">
+            <span>
+                <i class="ion-android-call"></i>
+                <p>{{ artisan.user.phone }}</p>
+            </span>
+
+            <span>
+                <i class="ion-ios-email"></i>
+                <p>{{ artisan.user.email }}</p>
+            </span>
+
+            <span>
+                <i class="ion-ios-location"></i>
+                <p>{{ artisan.address }}</p>
+            </span>
+        </div>
+
+    </div>
+    <div class="about-images">
+
+    </div>
+</section>
+<h3 class="show-head">{{ artisan.user.get_name }} Showcase</h3>
+<section class="artisan-gallery">
+
+    {% for image in images %}
+    <figure class="gallery__item gallery__item--{{ forloop.counter }}">
+        <img src="{{ image.image.url }}" alt="Gallery image 1" class="gallery__img" />
+    </figure>
+    {% endfor %}
+
+
+</section>
+
+<button class="btn-hire" type="submit">Contact {{ artisan.user.get_name }}</button>
+{% endblock content %}

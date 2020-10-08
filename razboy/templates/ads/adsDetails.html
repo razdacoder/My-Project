@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Ads
+{{ad.title}}
 {% endblock title %}
 
 {% block r %}r{% endblock r %}
@@ -30,6 +30,7 @@ Ads
                 {% csrf_token %}
                 <button type="submit" name="ad_id" class="btn-like" value="{{ ad.id }}"
                     style="border: none; background: #ccc; cursor: pointer; outline: none">
+                    
                     <i class="ion-ios-star-outline"></i>
                     <p class="likes-count">{{ ad.liked.count }}</p>
                 </button>

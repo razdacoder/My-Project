@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Artisan
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<div class="artisan-container">
+    <h3 class="pages-head">
+        Artisans in Ilaro
+    </h3>
+    <div class="row">
+
+        {% for art in data %}
+        <div class="art-card">
+            <img src="{{ art.art.user.photo.url }}" alt="Person" class="art-img" />
+            <div class="card-body">
+                <h3 class="title-art">{{ art.art.user.fullname }}</h3>
+                <h4 class="title2">{{ art.art.job }}</h4>
+            </div>
+            <div class="card-bottom">
+                <span>
+                    <i class="ion-ios-heart icon-likes"></i>
+                    <p class="like-num">245</p>
+                </span>
+                <a class="btn btn-art" href="{% url 'artisan_details' art.art.id %}">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+</div>
+
+<div class="pagination">
+
+    {% if data.has_previous %}
+    <a href="?page=1" class="page">
+        <i class="ion-ios-arrow-left"></i>
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    <a href="?page={{ data.previous_page_number}}" class="page">
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    {% endif %}
+
+
+
+    {% for num in data.paginator.page_range %}
+
+    {% if data.number == num %}
+    <strong class="page">{{ num }}</strong>
+
+    {% elif num > data.number|add:'-3' and num < data.number|add:'3'%}
+    <a href="?page={{ num }}" class="page">{{ num }}</a>
+    {% endif %}
+
+    {% endfor %}
+
+
+    {% comment %} <a href="#" class="page">
+        1
+    </a>
+    <a href="#" class="page">
+        2
+    </a>
+    <a href="#" class="page">
+        3
+    </a> {% endcomment %}
+
+    {% if data.has_next %}
+    <a href="?page={{ data.next_page_number }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    <a href="?page={{ data.paginator.num_pages }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    {% endif %}
+
+</div>
+{% endblock content %}

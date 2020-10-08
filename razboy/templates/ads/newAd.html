@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Post Ad
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<section class="form-section" style="margin: 10rem 0rem">
+    <form class="login-form" action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3 class="form-heading">Post Ad</h3>
+        <div class="select-con">
+            <div class="selected">
+                <p>Select a category</p>
+                <i class="select-icon ion-chevron-down"></i>
+            </div>
+            <div class="option-container active">
+                <div class="option">
+                    <input type="radio" name="select" id="computer" value="computers" />
+                    <label for="computer">Computers and Accessories</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="select" id="phones" value="phones" />
+                    <label for="phones">Phones and Tablets</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="select" id="electronics" value="electronic" />
+                    <label for="electronics">Electronics</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="select" id="kids" value="babies" />
+                    <label for="kids">Kids and Toys</label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" name="select" id="cars" value="cars" />
+                    <label for="cars">Cars</label>
+                </div>
+
+
+
+                <div class="option">
+                    <input type="radio" name="select" id="home" value="home" />
+                    <label for="home">Home and Kicthen</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Title" name="title" required />
+        </div>
+        <div class="form-group">
+            <textarea placeholder="Description" name="description"></textarea>
+        </div>
+        <div class="form-images">
+            <div class="imgs-group">
+                <input type="file" id="img1" multiple name="post-images1" />
+                <label for="img1">
+                    <i class="ion-ios-camera"></i>
+                </label>
+            </div>
+
+            <div class="imgs-group">
+                <input type="file" id="img2" multiple name="post-images2" />
+                <label for="img2">
+                    <i class="ion-ios-camera"></i>
+                </label>
+            </div>
+
+            <div class="imgs-group">
+                <input type="file" id="img3" multiple name="post-images3" />
+                <label for="img3">
+                    <i class="ion-ios-camera"></i>
+                </label>
+            </div>
+
+            <div class="imgs-group">
+                <input type="file" id="img4" multiple name="post-images4" />
+                <label for="img4">
+                    <i class="ion-ios-camera"></i>
+                </label>
+            </div>
+
+            <div class="imgs-group">
+                <input type="file" id="img5" multiple name="post-images5" />
+                <label for="img5">
+                    <i class="ion-ios-camera"></i>
+                </label>
+            </div>
+
+
+
+        </div>
+
+        <div class="form-group">
+            <input type="text" placeholder="Location" name="location" required />
+        </div>
+
+        <div class="form-group2">
+            <div class="form-group2-price">
+                <label for="price">&#8358;</label>
+                <input type="number" id="price" placeholder="Price" name="price" required />
+            </div>
+
+            <div class="form-group2-box">
+                <input type="checkbox" id="boosted" name="boosted" />
+                <label for="boosted">Boosted</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Post</button>
+        </div>
+    </form>
+</section>
+{% endblock content %}
