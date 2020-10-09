@@ -35,6 +35,75 @@ if (options) {
 
 //     });
 // });
+const tabs = document.querySelectorAll('[data-tab-target]')
+const tabContent = document.querySelectorAll('.content')
+// console.log(tabs)
+
+if (tabs) {
+    tabs.forEach(tab => {
+
+        tab.addEventListener('click', () => {
+            tab.classList.remove('active')
+            const target = document.querySelector(tab.dataset.tabTarget)
+            tabContent.forEach(tabcontent => {
+                tabcontent.classList.remove('active')
+            })
+            tabs.forEach(tabcontent => {
+                tabcontent.classList.remove('active')
+            })
+            tab.classList.add('active')
+            target.classList.add('active')
+        })
+    })
+}
+
+const state = {}
+
+
+
+// const editBtns = document.querySelectorAll('.edit-ad')
+// if (editBtns) {
+//     editBtns.forEach(btn => {
+//         btn.addEventListener('click', (e) => {
+//             const btnValue = btn.value
+//             console.log(btnValue)
+//             fetch(`http://localhost:8000/api/getAd/${btnValue}/`)
+//                 .then(response => response.json())
+//                 .then(data => {
+//                     state.data = data
+//                     console.log(state.data.ad)
+//                     const editAdPage = `
+
+//                 `
+//                     document.querySelector('#edit_ad_page').insertAdjacentElement('afterbegin', editAdPage)
+
+//                 });
+
+
+//         })
+//     })
+// }
+
+
+// const editPic = document.querySelector('.edit-pic')
+// if (editPic) {
+//     editPic.addEventListener('change', () => {
+//         const csrftoken = Cookies.get('csrftoken');
+//         axios({
+//             method: 'patch',
+//             url: `http://127.0.0.1:8000/api/editPic/`,
+//             data: {
+//                 image: editPic.value,
+
+//             },
+//             headers: { 'X-CSRFToken': csrftoken }
+//         });
+//     })
+// }
+
+
+
+
 
 
 

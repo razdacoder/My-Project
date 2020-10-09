@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from .models import *
+from main.models import *
 
 
 def index_view(request):
@@ -61,3 +62,76 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+
+@login_required(login_url="login")
+def profile_view(request):
+
+    qs = Ad.objects.filter(user=request.user)
+    data = []
+
+    for ad in qs:
+        imgs = AdImage.objects.filter(ad=ad.id)
+        ads = {"ad": ad, "images": imgs}
+        data.append(ads)
+
+    context = {
+        "adData": data,
+    }
+    return render(request, 'profile.html', context)
+
+
+@login_required(login_url="login")
+def edit_pic_view(request):
+    pic = request.FILES.get('pic')
+    user = MyUser.objects.get(email=request.user.email)
+    user.photo = pic
+    user.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_name_view(request):
+    name = request.POST.get('fullname')
+    user = MyUser.objects.get(email=request.user.email)
+    user.fullname = name
+    user.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_mail_view(request):
+    email = request.POST.get('email')
+    user = MyUser.objects.get(email=request.user.email)
+    user.email = email
+    user.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_phone_view(request):
+    phone = request.POST.get('phone')
+    user = MyUser.objects.get(email=request.user.email)
+    user.phone = phone
+    user.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_pass_view(request):
+    curr_pass = request.POST.get('currPass')
+    new_pass = request.POST.get('newPass')
+    new_pass_confirm = request.POST.get('newPassConfirm')
+    user = MyUser.objects.get(email=request.user.email)
+    if user.password == curr_pass:
+        if new_pass == new_pass_confirm:
+            user.set_password(new_pass)
+            user.save()
+            messages.success(request, "Password Changed Successfully!!")
+            return redirect("profile")
+        else:
+            messages.error(request, "Passwords do not match")
+            return redirect("profile")
+    else:
+        messages.error(request, "Incorrect Password")
+        return redirect("profile")

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ request.user.get_name }}
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<div class="profile-content" style="width: 100%; overflow: hidden; background-color: #f7f7f7">
+    <div class="edit-ad">
+        <h3 class="content-head">Edit {{ ad.title }} </h3>
+        <div class="account-info">
+            <h4 class="content-sub-head">Ad Information</h4>
+            <div class="acc-box">
+                <div class="acc-input-box">
+                    <div class="form-group input-box">
+                        <input type="text" placeholder="Title" value="{{ ad.title }}" />
+                    </div>
+                    <button type="button" class="edit-phone">
+                        <i class="ion-ios-checkmark-outline"></i>
+                    </button>
+                </div>
+                <div class="acc-input-box">
+                    <div class="form-group input-box">
+                        <textarea cols="30" rows="15" placeholder="Description">{{ad.description}}
+                </textarea>
+                    </div>
+                    <button type="button" class="edit-phone">
+                        <i class="ion-ios-checkmark-outline"></i>
+                    </button>
+                </div>
+                <div class="acc-input-box">
+                    <div class="form-group2 input-box">
+                        <div class="form-group2-price">
+                            <label for="price">&#8358;</label>
+                            <input type="number" id="price" placeholder="Price" required value="{{ ad.price }}" />
+                        </div>
+
+                    </div>
+                    <button type="button" class="edit-phone">
+                        <i class="ion-ios-checkmark-outline"></i>
+                    </button>
+                </div>
+
+                <div class="acc-input-box">
+                    <div class="form-group input-box">
+                        <input type="text" placeholder="Location" value="{{ad.location}}" />
+                    </div>
+                    <button type="button" class="edit-phone">
+                        <i class="ion-ios-checkmark-outline"></i>
+                    </button>
+                </div>
+                <h3 class="content-sub-head">Ad Images</h3>
+                <div class="acc-input-box">
+                    <div class="form-images">
+
+                        {% for image in images %}
+                        <div class="imgs-group" style="height:20rem; border: none;">
+                            <input type="file" id="img1" />
+                            <label for="img1">
+                                <i style="display:none;" class="ion-ios-camera"></i>
+                                <img class="form-img" src="{{ image.image.url }}" alt="" />
+                            </label>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

@@ -17,6 +17,12 @@ urlpatterns = [
     path('register', register_view, name="register"),
     path("login", login_view, name="login"),
     path("logout", logout_view, name="logout"),
+    path("me/", profile_view, name="profile"),
+    path("editPic/", edit_pic_view, name="editPic"),
+    path("editName/", edit_name_view, name="editName"),
+    path("editEmail/", edit_mail_view, name="editEmail"),
+    path("editPhone/", edit_phone_view, name="editPhone"),
+    path("editPass/", edit_pass_view, name="editPass"),
 
     path("password_reset/", auth_views.PasswordResetView.as_view(),
          name="reset_password"),
@@ -33,6 +39,8 @@ urlpatterns = [
     path("like_ads/<str:pk>/", ads_like_view, name="like_ad"),
     path("ads/<str:id>/", ads_details_view, name="ads_details"),
     path("post_ad/", create_ad_view, name="create_ad"),
+    path("editAd/<str:id>/", edit_ad_view, name="edit_ad"),
+
 
     # Artisan Routes
     path("artisans/", artisan_view, name="artisan"),

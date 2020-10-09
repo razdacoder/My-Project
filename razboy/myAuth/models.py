@@ -1,5 +1,9 @@
 from django.db import models
 import uuid
+from PIL import Image
+from io import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import sys
 
 # Create your models here.
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -50,7 +54,7 @@ class MyUser(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     fullname = models.CharField(max_length=60)
     phone = models.PositiveIntegerField()
-    photo = models.ImageField()
+    photo = models.ImageField(default="default.png")
     is_artisan = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
@@ -72,3 +76,22 @@ class MyUser(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+    def save(self, *args, **kwargs):
+        # Opening the uploaded image
+        im = Image.open(self.photo)
+
+        output = BytesIO()
+
+        # Resize/modify the image
+        im = im.resize((500, 500))
+
+        # after modifications, save it to the output
+        im.save(output, format='JPEG', quality=100)
+        output.seek(0)
+
+        # change the imagefield value to be the newley modifed image value
+        self.photo = InMemoryUploadedFile(output, 'ImageField', "%s.jpg" % self.photo.name.split(
+            '.')[0], 'image/jpeg', sys.getsizeof(output), None)
+
+        super().save(*args, **kwargs)

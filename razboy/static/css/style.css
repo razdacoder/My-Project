@@ -8,6 +8,22 @@
   color: #777;
 }
 
+button,a {
+  cursor: pointer;
+}
+
+.content {
+  display: none;
+}
+
+.no-ads {
+  font-size: 3rem;
+  text-align: center;
+}
+.content.active {
+  display: block;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -602,6 +618,7 @@ body {
   color: #000;
   font-family: inherit;
   border-bottom: 3px solid transparent;
+  font-size: 1.7rem;
 }
 
 .form-group input::placeholder {
@@ -1320,7 +1337,7 @@ body {
   background-color: #f7f7f7;
   display: flex;
   align-items: stretch;
-  height: calc(60vh - 8rem);
+  height: calc(100vh - 8rem);
 }
 
 .profile-tab {

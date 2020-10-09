@@ -120,3 +120,14 @@ def artisan_detail_view(request, id):
         "images": images
     }
     return render(request, "artisan/artDetails.html", context)
+
+
+def edit_ad_view(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    images = AdImage.objects.filter(ad=ad.id)
+    context = {
+        "ad": ad,
+        "images": images
+    }
+
+    return render(request, 'editAd.html', context)
