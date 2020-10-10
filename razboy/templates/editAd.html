@@ -13,44 +13,62 @@
         <div class="account-info">
             <h4 class="content-sub-head">Ad Information</h4>
             <div class="acc-box">
-                <div class="acc-input-box">
-                    <div class="form-group input-box">
-                        <input type="text" placeholder="Title" value="{{ ad.title }}" />
-                    </div>
-                    <button type="button" class="edit-phone">
-                        <i class="ion-ios-checkmark-outline"></i>
-                    </button>
-                </div>
-                <div class="acc-input-box">
-                    <div class="form-group input-box">
-                        <textarea cols="30" rows="15" placeholder="Description">{{ad.description}}
-                </textarea>
-                    </div>
-                    <button type="button" class="edit-phone">
-                        <i class="ion-ios-checkmark-outline"></i>
-                    </button>
-                </div>
-                <div class="acc-input-box">
-                    <div class="form-group2 input-box">
-                        <div class="form-group2-price">
-                            <label for="price">&#8358;</label>
-                            <input type="number" id="price" placeholder="Price" required value="{{ ad.price }}" />
+                <form action="{% url 'edit_ad_title' ad.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="acc-input-box">
+                        <div class="form-group input-box">
+                            <input type="text" placeholder="Title" value="{{ ad.title }}" name="title" />
+                            <!-- <input type="hidden" value="{{ ad.id }}" name="ad_id"> -->
                         </div>
-
+                        <button type="submit" class="edit-phone">
+                            <i class="ion-ios-checkmark-outline"></i>
+                        </button>
                     </div>
-                    <button type="button" class="edit-phone">
-                        <i class="ion-ios-checkmark-outline"></i>
-                    </button>
-                </div>
+                </form>
 
-                <div class="acc-input-box">
-                    <div class="form-group input-box">
-                        <input type="text" placeholder="Location" value="{{ad.location}}" />
+                <form action="{% url 'edit_ad_des' ad.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="acc-input-box">
+                        <div class="form-group input-box">
+                            <textarea cols="30" rows="15" placeholder="Description" name="des">{{ad.description}}
+                    </textarea>
+                        </div>
+                        <button type="submit" class="edit-phone">
+                            <i class="ion-ios-checkmark-outline"></i>
+                        </button>
                     </div>
-                    <button type="button" class="edit-phone">
-                        <i class="ion-ios-checkmark-outline"></i>
-                    </button>
-                </div>
+                </form>
+
+                <form action="{% url 'edit_ad_price' ad.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="acc-input-box">
+                        <div class="form-group2 input-box">
+                            <div class="form-group2-price">
+                                <label for="price">&#8358;</label>
+                                <input type="number" id="price" placeholder="Price" required value="{{ ad.price }}"
+                                    name="price" />
+                            </div>
+
+                        </div>
+                        <button type="submit" class="edit-phone">
+                            <i class="ion-ios-checkmark-outline"></i>
+                        </button>
+                    </div>
+                </form>
+
+
+                <form action="{% url 'edit_ad_loc' ad.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="acc-input-box">
+                        <div class="form-group input-box">
+                            <input type="text" placeholder="Location" value="{{ad.location}}" name="location" />
+                        </div>
+                        <button type="submit" class="edit-phone">
+                            <i class="ion-ios-checkmark-outline"></i>
+                        </button>
+                    </div>
+                </form>
+
                 <h3 class="content-sub-head">Ad Images</h3>
                 <div class="acc-input-box">
                     <div class="form-images">

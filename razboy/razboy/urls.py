@@ -40,6 +40,10 @@ urlpatterns = [
     path("ads/<str:id>/", ads_details_view, name="ads_details"),
     path("post_ad/", create_ad_view, name="create_ad"),
     path("editAd/<str:id>/", edit_ad_view, name="edit_ad"),
+    path("editAdTitle/<str:id>/", edit_ad_title, name="edit_ad_title"),
+    path("editAdDes/<str:id>/", edit_ad_des, name="edit_ad_des"),
+    path("editAdPrice/<str:id>/", edit_ad_price, name="edit_ad_price"),
+    path("editAdLoc/<str:id>/", edit_ad_loc, name="edit_ad_loc"),
 
 
     # Artisan Routes

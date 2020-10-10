@@ -122,6 +122,7 @@ def artisan_detail_view(request, id):
     return render(request, "artisan/artDetails.html", context)
 
 
+@login_required(login_url="login")
 def edit_ad_view(request, id):
     ad = get_object_or_404(Ad, id=id)
     images = AdImage.objects.filter(ad=ad.id)
@@ -131,3 +132,39 @@ def edit_ad_view(request, id):
     }
 
     return render(request, 'editAd.html', context)
+
+
+@login_required(login_url="login")
+def edit_ad_title(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    title = request.POST.get("title")
+    ad.title = title
+    ad.save()
+    return HttpResponseRedirect(reverse('edit_ad', args=[str(id)]))
+
+
+@login_required(login_url="login")
+def edit_ad_des(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    des = request.POST.get("des")
+    ad.description = des
+    ad.save()
+    return HttpResponseRedirect(reverse('edit_ad', args=[str(id)]))
+
+
+@login_required(login_url="login")
+def edit_ad_price(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    price = request.POST.get("price")
+    ad.price = price
+    ad.save()
+    return HttpResponseRedirect(reverse('edit_ad', args=[str(id)]))
+
+
+@login_required(login_url="login")
+def edit_ad_loc(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    location = request.POST.get("location")
+    ad.location = location
+    ad.save()
+    return HttpResponseRedirect(reverse('edit_ad', args=[str(id)]))
