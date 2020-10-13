@@ -44,11 +44,20 @@ urlpatterns = [
     path("editAdDes/<str:id>/", edit_ad_des, name="edit_ad_des"),
     path("editAdPrice/<str:id>/", edit_ad_price, name="edit_ad_price"),
     path("editAdLoc/<str:id>/", edit_ad_loc, name="edit_ad_loc"),
+    path("deleteAd/<str:id>/", delete_ad, name="delete_ad"),
 
 
     # Artisan Routes
     path("artisans/", artisan_view, name="artisan"),
     path("artisan_details/<str:id>/", artisan_detail_view, name="artisan_details"),
+    path("editArtJob/<str:id>/", edit_art_job, name="edit_art_job"),
+    path("editArtAddress/<str:id>/", edit_art_address, name="edit_art_address"),
+    path("editArtAbout/<str:id>/", edit_art_about, name="edit_art_about"),
+    path("newArtisan/", new_artisan, name="new_artisan"),
+
+
+    # Blog Post Routes
+    path("blogs/", blogs_view, name="blogs"),
 
 
 

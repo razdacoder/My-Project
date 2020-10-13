@@ -158,7 +158,7 @@
                         <a class="btn edit-ad" href="{% url 'edit_ad' ad.ad.id %}" data-tab-target="#edit_ad_page"
                             value="{{ ad.ad.id }}">Edit
                             Ad</a>
-                        <a class="btn btn-details" href="#">
+                        <a class="btn btn-details" href="{% url 'delete_ad' ad.ad.id %}">
                             Delete
                             <!-- <i class="ion-ios-arrow-thin-right icon-btn"></i> -->
                         </a>
@@ -185,7 +185,93 @@
 
 
         <div class="edit-artisan content" id="edit_artisan" data-tab-content>
-            Edit artisan
+
+            {% if request.user.is_artisan == True %}
+
+            <div class="account-info">
+                <h4 class="content-sub-head">Edit Arisan Profile</h4>
+
+                <div class="acc-box">
+                    <form action="{% url 'edit_art_job' art.art.id %}" method="POST" class="form-art">
+                        {% csrf_token %}
+                        <div class="acc-input-box">
+                            <div class="form-group input-box">
+                                <input type="text" placeholder="Job" name="job" value="{{ art.art.job }}" />
+                            </div>
+                            <button type="submit" class="edit-name">
+                                <i class="ion-ios-checkmark-outline"></i>
+                            </button>
+
+                        </div>
+                    </form>
+
+                    <form action="{% url 'edit_art_address' art.art.id %}" method="POST" class="form-art">
+                        {% csrf_token %}
+                        <div class="acc-input-box">
+                            <div class="form-group input-box">
+                                <input type="text" placeholder="Address" name="address" value="{{ art.art.address }}" />
+                            </div>
+                            <button type="submit" class="edit-name">
+                                <i class="ion-ios-checkmark-outline"></i>
+                            </button>
+
+                        </div>
+                    </form>
+                    <form action="{% url 'edit_art_about' art.art.id %}" method="POST" class="form-art">
+                        {% csrf_token %}
+                        <div class="acc-input-box">
+                            <div class="form-group input-box">
+                                <textarea name="about" id="" cols="30" rows="10">{{ art.art.about }}</textarea>
+                            </div>
+                            <button type="submit" class="edit-name">
+                                <i class="ion-ios-checkmark-outline"></i>
+                            </button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+
+
+            <section class="artisan-gallery">
+
+                {% for image in art.images %}
+                <figure class="gallery__item gallery__item--{{ forloop.counter }}">
+                    <img src="{{ image.image.url }}" alt="Gallery image 1" class="gallery__img" />
+                </figure>
+                {% endfor %}
+
+
+            </section>
+            {% else %}
+            <div class="be-artisan">
+                <form class="artisan-form form-art" action="{% url 'new_artisan' %}" method="POST"
+                    accept-charset="utf-8" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3 class="form-heading">Become an artisan</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="Job" name="job" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="about" id="" cols="30" rows="10" placeholder="About"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Address" name="address" required>
+                    </div>
+                    <div class="form-img">
+                        <input type="file" name="images" id="art-img" required multiple>
+                        <label for="art-img" class="art-label">Upload Images for Gallery</label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn-submit">Post</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+
         </div>
     </div>
 </div>

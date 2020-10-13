@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -77,7 +77,19 @@ def profile_view(request):
 
     context = {
         "adData": data,
+        # "art": artisan
     }
+
+    if request.user.is_artisan == True:
+        art = get_object_or_404(Artisan, user=request.user)
+        artImages = GalleryImage.objects.filter(artisan=art.id)
+
+        artisan = {
+            "art": art,
+            "images": artImages
+        }
+        context["art"] = artisan
+
     return render(request, 'profile.html', context)
 
 

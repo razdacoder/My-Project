@@ -168,3 +168,79 @@ def edit_ad_loc(request, id):
     ad.location = location
     ad.save()
     return HttpResponseRedirect(reverse('edit_ad', args=[str(id)]))
+
+
+@login_required(login_url="login")
+def delete_ad(request, id):
+    ad = get_object_or_404(Ad, id=id)
+    ad.delete()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_art_job(request, id):
+    job = request.POST.get('job')
+    artisan = get_object_or_404(Artisan, id=id)
+    artisan.job = job
+    artisan.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_art_address(request, id):
+    address = request.POST.get('address')
+    artisan = get_object_or_404(Artisan, id=id)
+    artisan.address = address
+    artisan.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def edit_art_about(request, id):
+    about = request.POST.get('about')
+    artisan = get_object_or_404(Artisan, id=id)
+    artisan.about = about
+    artisan.save()
+    return redirect("profile")
+
+
+@login_required(login_url="login")
+def new_artisan(request):
+    job = request.POST.get("job")
+    about = request.POST.get("about")
+    address = request.POST.get("address")
+    images = request.FILES.getlist("images")
+
+    artisan = Artisan.objects.create(
+        user=request.user,
+        address=address,
+        job=job,
+        about=about
+    )
+
+    for image in images:
+        img = GalleryImage.objects.create(
+            artisan=artisan,
+            image=image
+        )
+        img.save()
+    artisan.save()
+    user = MyUser.objects.get(email=request.user.email)
+    user.is_artisan = True
+    user.save()
+    return redirect("profile")
+
+
+# Blog Views
+
+def blogs_view(request):
+    post = ForumPost.objects.all()
+    paginator = Paginator(post, 4)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+
+    context = {
+        "posts": posts
+    }
+
+    return render(request, "blog/blogs.html", context)

@@ -7,8 +7,9 @@
 {% block r %}r{% endblock r %}
 
 {% block content %}
-<div class="artisan-header">
-    <img class="artisan-page-img" src="{{ images.0.image.url }}" alt="John Doe" />
+<div class="artisan-header"
+    style="background-image:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url({{ images.0.image.url }});">
+    <img class="artisan-page-img" src="{{ artisan.user.photo.url }}" alt="John Doe" />
     <button class="artisan-page-like" href="#">
         <i class="ion-ios-heart-outline"></i>
     </button>
@@ -29,7 +30,7 @@
         <div class="about-contact">
             <span>
                 <i class="ion-android-call"></i>
-                <p>{{ artisan.user.phone }}</p>
+                <p>0{{ artisan.user.phone }}</p>
             </span>
 
             <span>

@@ -56,6 +56,12 @@ body {
   align-items: center;
   padding: 0px 20px;
   height: 8rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: #fff;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1)
 }
 
 .logo-box {
@@ -1603,4 +1609,35 @@ body {
 
 .post_comment_count p {
   color: #777;
+}
+
+.be-artisan {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.artisan-form {
+  width: 70%;
+}
+
+.form-img {
+  margin: 3rem 0;
+  width: 100%;
+}
+
+.form-img input {
+  display: none;
+}
+
+.form-img label {
+  padding: 1.7rem;
+  background-color: #f60266;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  width: 100%;
+  cursor: pointer;
 }

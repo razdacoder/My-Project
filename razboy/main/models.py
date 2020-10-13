@@ -105,8 +105,8 @@ class Artisan(models.Model):
     about = models.TextField(max_length=1500)
     job = models.CharField(max_length=60)
     rating = models.PositiveIntegerField(default=0, null=True)
-    facebook = models.URLField(max_length=50)
-    github = models.URLField(max_length=50, null=True)
+    # facebook = models.URLField(max_length=50)
+    # github = models.URLField(max_length=50, null=True)
 
     def __str__(self):
         return self.user.fullname

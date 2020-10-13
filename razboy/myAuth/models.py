@@ -54,7 +54,7 @@ class MyUser(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     fullname = models.CharField(max_length=60)
     phone = models.PositiveIntegerField()
-    photo = models.ImageField(default="default.png")
+    photo = models.ImageField(default="default.jpg")
     is_artisan = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'

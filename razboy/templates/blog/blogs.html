@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ads
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<section class="posts-container">
+    <div class="row">
+
+        {% for post in posts %}
+        <div class="post_card" style="width: 100%; height: 15rem;">
+            <!-- <div class="post_card-head">
+              <img class="post_card-img" src="{{ post }}" alt="" />
+              <div class="post_card-date">
+                <span>26 Jun 2019</span>
+              </div>
+            </div> -->
+            <div class="post_card-body">
+                <h4 class="post_card-heading">
+                    {{ post.title }}.
+                </h4>
+                <p class="post_card-text">
+                    {{ post.body|truncatechars:40 }}
+                </p>
+                <div class="post_card-footer">
+                    <a class="post_card-btn" href="#">Read More</a>
+                    <div class="card-inner">
+                        <p>{{ post.user.get_name }}</p>
+                        <span class="post_comment_count">
+                            <i class="ion-android-textsms"></i>
+                            <p>5</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+    </div>
+</section>
+
+<div class="pagination">
+
+    {% if data.has_previous %}
+    <a href="?page=1" class="page">
+        <i class="ion-ios-arrow-left"></i>
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    <a href="?page={{ data.previous_page_number}}" class="page">
+        <i class="ion-ios-arrow-left"></i>
+    </a>
+    {% endif %}
+
+
+
+    {% for num in data.paginator.page_range %}
+
+    {% if data.number == num %}
+    <strong class="page">{{ num }}</strong>
+
+    {% elif num > data.number|add:'-3' and num < data.number|add:'3'%}
+    <a href="?page={{ num }}" class="page">{{ num }}</a>
+    {% endif %}
+
+    {% endfor %}
+
+
+    {% comment %} <a href="#" class="page">
+        1
+    </a>
+    <a href="#" class="page">
+        2
+    </a>
+    <a href="#" class="page">
+        3
+    </a> {% endcomment %}
+
+    {% if data.has_next %}
+    <a href="?page={{ data.next_page_number }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    <a href="?page={{ data.paginator.num_pages }}" class="page">
+        <i class="ion-ios-arrow-right"></i>
+        <i class="ion-ios-arrow-right"></i>
+    </a>
+    {% endif %}
+
+</div>
+{% endblock content %}
