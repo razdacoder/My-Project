@@ -239,8 +239,67 @@ def blogs_view(request):
     page = request.GET.get('page')
     posts = paginator.get_page(page)
 
+    for pos in post:
+        comments = Comment.objects.filter(post=pos)
+        conCount = comments.count()
+
     context = {
-        "posts": posts
+        "posts": posts,
+        "count": conCount
     }
 
     return render(request, "blog/blogs.html", context)
+
+
+def blog_details_view(request, id):
+    post = get_object_or_404(ForumPost, id=id)
+    comments = Comment.objects.filter(post=post.id)
+    context = {
+        "post": post,
+        "comments": comments
+    }
+    post.views += 1
+    post.save()
+
+    return render(request, "blog/blogDetails.html", context)
+
+
+@login_required(login_url="login")
+def new_comment(request, id):
+    post = get_object_or_404(ForumPost, id=id)
+    comm = request.POST.get("comment")
+    comment = Comment.objects.create(
+        post=post,
+        comment=comm,
+        user=request.user
+    )
+
+    comment.save()
+    return HttpResponseRedirect(reverse('blog_details_view', args=[str(id)]))
+
+
+@login_required(login_url="login")
+def add_post_view(request):
+    if request.method == "GET":
+        return render(request, "blog/addBlog.html")
+    else:
+        title = request.POST.get("title")
+        body = request.POST.get("body")
+
+        post = ForumPost.objects.create(
+            user=request.user,
+            title=title,
+            body=body
+        )
+
+        post.save()
+
+        return HttpResponseRedirect(reverse('blog_details_view', args=[str(post.id)]))
+
+
+@login_required(login_url="login")
+def del_post(request, id):
+    post = get_object_or_404(ForumPost, id=id)
+    if post.user == request.user:
+        post.delete()
+    return redirect("profile")

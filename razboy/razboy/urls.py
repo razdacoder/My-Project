@@ -58,6 +58,10 @@ urlpatterns = [
 
     # Blog Post Routes
     path("blogs/", blogs_view, name="blogs"),
+    path("addBlog/", add_post_view, name="add_post_view"),
+    path("blogs/<str:id>/", blog_details_view, name="blog_details_view"),
+    path("new_comment/<str:id>/", new_comment, name="new_comment"),
+    path("delPost/<str:id>/", del_post, name="del_post"),
 
 
 

@@ -69,6 +69,7 @@ def profile_view(request):
 
     qs = Ad.objects.filter(user=request.user)
     data = []
+    posts = ForumPost.objects.filter(user=request.user)
 
     for ad in qs:
         imgs = AdImage.objects.filter(ad=ad.id)
@@ -78,6 +79,7 @@ def profile_view(request):
     context = {
         "adData": data,
         # "art": artisan
+        "posts": posts
     }
 
     if request.user.is_artisan == True:

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ads
+{% endblock title %}
+
+{% block r %}r{% endblock r %}
+
+{% block content %}
+<section class="form-section" style="margin: 10rem 0rem">
+    <form class="login-form" action="" method="POST">
+        {% csrf_token %}
+        <h3 class="form-heading">Create new Post</h3>
+
+        <div class="form-group">
+            <input type="text" placeholder="Post Title" name="title" required />
+        </div>
+        <div class="form-group">
+            <textarea name="body" id="" cols="30" rows="10" placeholder="Post Body"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn-submit">Create</button>
+        </div>
+    </form>
+</section>
+{% endblock content %}

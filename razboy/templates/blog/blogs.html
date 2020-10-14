@@ -7,31 +7,28 @@ Ads
 {% block r %}r{% endblock r %}
 
 {% block content %}
+<div style="width: 100%; height: 100px; margin-top: 30px; padding: 0 2.5rem;">
+    <a href="{% url 'add_post_view' %}" class="top-btn">Add Post</a>
+</div>
 <section class="posts-container">
     <div class="row">
 
         {% for post in posts %}
-        <div class="post_card" style="width: 100%; height: 15rem;">
-            <!-- <div class="post_card-head">
-              <img class="post_card-img" src="{{ post }}" alt="" />
-              <div class="post_card-date">
-                <span>26 Jun 2019</span>
-              </div>
-            </div> -->
+        <div class="post_card" style="width: 100%; height: 20rem;">
             <div class="post_card-body">
                 <h4 class="post_card-heading">
                     {{ post.title }}.
                 </h4>
                 <p class="post_card-text">
-                    {{ post.body|truncatechars:40 }}
+                    {{ post.body|truncatechars:300 }}
                 </p>
                 <div class="post_card-footer">
-                    <a class="post_card-btn" href="#">Read More</a>
+                    <a class="post_card-btn" href="{% url 'blog_details_view' post.id %}">Read More</a>
                     <div class="card-inner">
                         <p>{{ post.user.get_name }}</p>
                         <span class="post_comment_count">
                             <i class="ion-android-textsms"></i>
-                            <p>5</p>
+                            <p>{{ count }}</p>
                         </span>
                     </div>
                 </div>

@@ -19,7 +19,7 @@
             <p>Manage Ads</p>
         </a>
 
-        <a class="tab-links" data-tab-target="">
+        <a class="tab-links" data-tab-target="#manage-post">
             <i class="ion-ios-list-outline"></i>
             <p>Manage Posts</p>
         </a>
@@ -181,7 +181,30 @@
 
 
 
+        <div class="manage-post" id="manage-post">
+            {% if posts|length == 0 %}
+            <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+                <h3 class="no-ads" style="color: #333333;">You currently have no ads</h3>
+            </div>
 
+            {% else %}
+            {% for post in posts %}
+            <div class="post_card" style="width: 100%; height: 15rem;">
+                <div class="post_card-body">
+                    <h4 class="post_card-heading">
+                        {{ post.title }}
+                    </h4>
+                    <p class="post_card-text">
+                        {{ post.body|truncatechars:40 }}
+                    </p>
+                    <div class="post_card-footer">
+                        <a class="post_card-btn" href="{% url 'del_post' post.id %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
 
 
         <div class="edit-artisan content" id="edit_artisan" data-tab-content>

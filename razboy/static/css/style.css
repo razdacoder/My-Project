@@ -1518,40 +1518,16 @@ body {
 }
 
 .post_card {
-  width: 29rem;
-  height: 38rem;
+  width: 100%;
+  height: 45rem;
   margin: 2rem 0rem;
-  border: 2px solid black;
+  /* border: 2px solid #242582; */
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  /* padding: 2rem 0rem; */
 }
 
-.post_card-head {
-  width: 100%;
-  height: 50%;
-  position: relative;
-}
 
-.post_card-img {
-  width: 100%;
-  height: 100%;
-}
-
-.post_card-date {
-  position: absolute;
-  width: 8rem;
-  height: 3rem;
-  left: 0;
-  bottom: 0;
-  background-color: #242582;
-  text-align: center;
-  vertical-align: middle;
-  padding: 0.7rem 0rem;
-}
-
-.post_card-date span {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 600;
-}
 
 .post_card-body {
   width: 100%;
@@ -1563,11 +1539,12 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   text-transform: capitalize;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .post_card-text {
   font-size: 1.3rem;
+  margin-bottom: 2rem;
 }
 
 .post_card-footer {
@@ -1576,13 +1553,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .post_card-btn {
   padding: 1rem;
-  background-color: #242582;
-  border-radius: 150px;
-  color: #fff;
+  
+  color: #242582;
   font-weight: 700;
   font-size: 1.4rem;
 }
@@ -1591,7 +1569,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 35%;
+  width: 15%;
 }
 
 .card-inner p {
@@ -1640,4 +1618,141 @@ body {
   border-radius: 8px;
   width: 100%;
   cursor: pointer;
+}
+
+.blog_details {
+  padding: 3rem 2.5rem;
+  width: 100%;
+}
+
+.blog_details-head {
+  width: 100%;
+  margin-top: 3rem;
+}
+
+.blog_details-head h2 {
+  font-size: 3rem;
+  color: #333333;
+}
+
+.details-date {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.details-date span {
+  font-size: 2rem;
+  color: #333333;
+}
+
+.blog_details-body {
+  margin: 3rem 0;
+}
+
+.blog_details-body p {
+  font-size: 2rem;
+  color: #333333;
+}
+
+.comment-section {
+  width: 100%;
+  margin-top: 10rem;
+}
+
+.comment {
+  width: 70%;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  margin-bottom: 3rem;
+  height: 15rem;
+  border-bottom: 3px solid #242582;
+}
+
+.comment img {
+  width: auto;
+  height: 10rem;
+  border-radius: 50%;
+}
+
+.com-details {
+  margin-left: 5rem;
+}
+
+.com-details h4 {
+  font-size: 1.7rem;
+  color: #333333;
+}
+
+.com-details p {
+  font-size: 1.5rem;
+  color: #333333;
+}
+
+.com-details span {
+  font-size: 1.3rem;
+  color: #333333;
+  margin-top: 3rem;
+  display: block;
+}
+
+.new-comment {
+  width: 100%;
+  background-color: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10rem 0;
+}
+
+.new-comment form {
+  width: 50rem;
+}
+
+.new-comment form h2{
+  font-size: 2rem;
+  color: #242582;
+  margin-bottom: 3rem;
+}
+
+.btn-comment {
+  width: 40%;
+  background-color: #242582;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1.7rem;
+  border: none;
+  border-radius: 6px;
+}
+
+.top-btn {
+  padding: 1.7rem;
+  background-color:#242582;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.7rem;
+  float: right;
+  border-radius: 6px;
+}
+
+.details-user {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.details-user img {
+  width: auto;
+  height: 7.5rem;
+  border-radius: 50%;
+}
+
+.details-user span {
+  font-size: 1.5rem;
+  color: #333333;
 }
