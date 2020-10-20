@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %}
+{% block r %}r{% endblock r %}
+{% block content %}
+{% if ads|length != 0 %}
+<section class="ads-popular" style="margin-bottom: 50px;">
+    <div class="head-box">
+        <p class="" style="color: #fff; font-size: 22px;">Found {{ ads|length}} Ads results for {{ query }}</p>
+    </div>
+    <div class="row">
+        {% for ad in ads %}
+        <div class="ads-card">
+            <img class="ads-img" src="{{ ad.images.0.image.url }}" alt="Iphone 2" />
+            <!-- <i class="ion-ios-star-outline icon-star"></i> -->
+            <h4 class="title">{{ ad.ad.title }}</h4>
+            <div class="card-bottom">
+                <p class="sub-title">&#8358;{{ ad.ad.price }}</p>
+                <a class="btn btn-details" href="{% url 'ads_details' ad.ad.id %}">
+                    Details
+                    <!-- <i class="ion-ios-arrow-thin-right icon-btn"></i> -->
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+    <!-- <a class="view-all-btn white" href="#"> See More </a> -->
+</section>
+
+
+
+
+
+{% elif artisans|length != 0 %}
+
+
+<section class="artisan-popular">
+    <div class="head-box">
+        <p class="" style="color: #242582; font-size: 22px;">Found {{ artisans|length}} Artisan results for {{ query }}
+        </p>
+    </div>
+
+    <div class="row">
+
+        {% for artisan in artisans %}
+        <div class="art-card">
+            <img src="{{ artisan.user.photo.url }}" alt="Person" class="art-img" />
+            <div class="card-body">
+                <h3 class="title-art">{{ artisan.user.fullname }}</h3>
+                <h4 class="title2">{{ artisan.job }}</h4>
+            </div>
+            <div class="card-bottom">
+                <span>
+                    <i class="ion-ios-heart icon-likes"></i>
+                    <p class="like-num">245</p>
+                </span>
+                <a class="btn btn-art" href="{% url 'artisan_details' artisan.id %}">Details</a>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+
+    </div>
+    <!-- <a class="view-all-btn blue-btn" href="#"> See More </a> -->
+</section>
+
+{% endif %}
+
+
+{% if posts|length != 0 %}
+<section class="latest-post">
+    <p class="" style="color: #242582; font-size: 22px;">Found {{ posts|length}} Post results for {{ query }}</p>
+    <div class="row">
+        {% for post in posts %}
+        <div class="post_card" style="width: 100%; height: 20rem;">
+            <div class="post_card-body">
+                <h4 class="post_card-heading">
+                    {{ post.post.title }}
+                </h4>
+                <p class="post_card-text">
+                    {{ post.post.body|truncatechars:300 }}
+                </p>
+                <div class="post_card-footer">
+                    <a class="post_card-btn" href="{% url 'blog_details_view' post.post.id %}">Read More</a>
+                    <div class="card-inner">
+                        <p>{{ post.post.user.get_name }}</p>
+                        <span class="post_comment_count">
+                            <i class="ion-android-textsms"></i>
+                            <p>{{ post.count }}</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+{% endif %}
+
+
+
+
+{% endblock content %}

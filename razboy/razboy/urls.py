@@ -64,7 +64,9 @@ urlpatterns = [
     path("delPost/<str:id>/", del_post, name="del_post"),
 
 
+    path("contact/", contact_view, name="contact_view"),
 
+    path("search/", search_view, name="search_view"),
 
 
 

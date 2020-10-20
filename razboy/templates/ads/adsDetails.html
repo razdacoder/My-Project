@@ -7,50 +7,100 @@
 {% block r %}r{% endblock r %}
 
 {% block content %}
-    <section class="details-container">
-     <div class="details-images">
-       <div class="image-view">
-         <figure class="image-fig-view">
-           <img class="img-view" src="{{ images.0.image.url }}" alt="Image 1" />
-         </figure>
-       </div>
-     </div>
-     <div class="details-info">
-       <div class="details-top">
-         <h3 class="details-title">{{ ad.title }}</h3>
-         <p class="details-big">
-           <span class="cur">&#8358;</span>
-           <span class="price">
-             {{ ad.price }}
-           </span>
-         </p>
-       </div>
-       <div class="details-body">
-            <form action="{% url 'like_ad' ad.pk %}" method="POST">
-                {% csrf_token %}
-                <button type="submit" name="ad_id" class="btn-like" value="{{ ad.id }}"
-                    style="border: none; background: #ccc; cursor: pointer; outline: none">
-                    
-                    <i class="ion-ios-star-outline"></i>
-                    <p class="likes-count">{{ ad.liked.count }}</p>
-                </button>
+<section class="details-container">
+  <div class="details-images">
+    <div class="image-view">
+      <figure class="image-fig-view">
+        <img class="img-view" src="{{ images.0.image.url }}" alt="Image 1" />
+      </figure>
+    </div>
+  </div>
+  <div class="details-info">
+    <div class="details-top">
+      <h3 class="details-title">{{ ad.title }}</h3>
+      <p class="details-big">
+        <span class="cur">&#8358;</span>
+        <span class="price">
+          {{ ad.price }}
+        </span>
+      </p>
+    </div>
+    <div class="details-body">
+      <form action="{% url 'like_ad' ad.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" name="ad_id" class="btn-like" value="{{ ad.id }}"
+          style="border: none; background: #ccc; cursor: pointer; outline: none">
 
-            </form>
-         
-         <div class="details-des">
-           <p class="text">
-             {{ ad.description }}
-           </p>
-         </div>
-       </div>
-       <div class="details-bottom">
-         <div class="seller-info">
-           <img class="seller-img" src="{{ ad.user.photo.url }}" alt="" />
-           <h5 class="seller-name">{{ ad.user.fullname }}</h5>
-         </div>
-         <button class="btn-chat" type="submit">Contact</button>
-       </div>
-     </div>
-   </section>
+          <i class="ion-ios-star-outline"></i>
+          <p class="likes-count">{{ ad.liked.count }}</p>
+        </button>
+
+      </form>
+
+      <div class="details-des">
+        <p class="text">
+          {{ ad.description }}
+        </p>
+      </div>
+    </div>
+    <div class="details-bottom">
+      <div class="seller-info">
+        <img class="seller-img" src="{{ ad.user.photo.url }}" alt="" />
+        <h5 class="seller-name">{{ ad.user.fullname }}</h5>
+      </div>
+      <button class="btn-chat" type="submit">Contact</button>
+    </div>
+  </div>
+</section>
+<script>
+  (function (t, a, l, k, j, s) {
+    s = a.createElement('script'); s.async = 1; s.src = "https://cdn.talkjs.com/talk.js"; a.head.appendChild(s)
+      ; k = t.Promise; t.Talk = {
+        v: 3, ready: {
+          then: function (f) {
+            if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
+              .push([f])
+          }, catch: function () { return k && new k() }, c: l
+        }
+      };
+  })(window, document, []);
+
+
+</script>
+
+
+<!-- container element in which TalkJS will display a chat UI -->
+<div id="talkjs-container" style="width: 90%; margin: 30px; height: 500px">
+  <i>Loading chat...</i>
+</div>
+
+<script>
+  await Talk.ready;
+  const me = new Talk.User({
+    id: "123456",
+    name: "Alice",
+    email: "alice@example.com",
+    photoUrl: "https://demo.talkjs.com/img/alice.jpg",
+    welcomeMessage: "Hey there! How are you? :-)"
+  });
+  const session = new Talk.Session({
+    appId: "tlRv5Awl",
+    me: me
+  });
+  const other = new Talk.User({
+    id: "654321",
+    name: "Sebastian",
+    email: "Sebastian@example.com",
+    photoUrl: "https://demo.talkjs.com/img/sebastian.jpg",
+    welcomeMessage: "Hey, how can I help?"
+  });
+
+  const conversation = session.getOrCreateConversation(Talk.oneOnOneId(me, other));
+  conversation.setParticipant(me);
+  conversation.setParticipant(other);
+
+  const inbox = session.createInbox({ selected: conversation });
+  inbox.mount(document.getElementById("talkjs-container"));
+</script>
+
 {% endblock content %}
-

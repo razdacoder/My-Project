@@ -96,18 +96,19 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.post
- 
 
 
 class Artisan(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-    address = models.CharField(max_length=150)
+    address = models.CharField(max_length=150, default="Ilaro Ogun State")
     about = models.TextField(max_length=1500)
     job = models.CharField(max_length=60)
     rating = models.PositiveIntegerField(default=0, null=True)
     # facebook = models.URLField(max_length=50)
     # github = models.URLField(max_length=50, null=True)
+    lat = models.CharField(max_length=50, null=True)
+    long = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return self.user.fullname
@@ -146,6 +147,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=60)
     email = models.EmailField(max_length=60)
     message = models.TextField(max_length=300)
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name

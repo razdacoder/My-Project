@@ -22,12 +22,12 @@
     </div>
 </div>
 <section class="artisan-features">
-    <div class="about">
+    <div class="about" style="width: 100%;">
         <h3 class="about-head">About {{ artisan.user.get_name }}</h3>
-        <p class="about-text">
+        <p class="about-text" style="font-size: 22px;">
             {{ artisan.about }}
         </p>
-        <div class="about-contact">
+        <div class="about-contact" style="margin: 0 auto; width: 75%;">
             <span>
                 <i class="ion-android-call"></i>
                 <p>0{{ artisan.user.phone }}</p>
@@ -60,6 +60,25 @@
 
 
 </section>
+
+
+<section style="width: 100%; height: 60vh; margin-top: 80px;">
+    <div id='map' style='width: 100%; height: 100%;'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicmF6Ym95IiwiYSI6ImNrYjkybTA5ZjBhM2kyc3BpYjVrOGEzMmkifQ.DUMYw49QNZ1EYzbuBnVo3Q';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11', // stylesheet location
+            center: [{{ artisan.long }}, {{ artisan.lat }}], // starting position [lng, lat]
+        zoom: 15 // starting zoom
+        });
+
+        var marker = new mapboxgl.Marker()
+        marker.setLngLat([{{ artisan.long }}, {{ artisan.lat }}])
+        marker.addTo(map); // add the marker to the map
+    </script>
+</section>
+
 
 <button class="btn-hire" type="submit">Contact {{ artisan.user.get_name }}</button>
 {% endblock content %}

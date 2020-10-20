@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from .models import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from geopy.geocoders import Nominatim
 
 
 def ads_view(request):
@@ -211,11 +212,18 @@ def new_artisan(request):
     address = request.POST.get("address")
     images = request.FILES.getlist("images")
 
+    geolocator = Nominatim(user_agent="Final Project")
+    location = geolocator.geocode(address)
+    print(location.address)
+    print((location.latitude, location.longitude))
+
     artisan = Artisan.objects.create(
         user=request.user,
         address=address,
         job=job,
-        about=about
+        about=about,
+        lat=location.latitude,
+        long=location.longitude
     )
 
     for image in images:
@@ -303,3 +311,36 @@ def del_post(request, id):
     if post.user == request.user:
         post.delete()
     return redirect("profile")
+
+
+def search_view(request):
+    query = request.GET.get("query")
+
+    ads_qs = Ad.objects.filter(title__icontains=query) or Ad.objects.filter(
+        categories__icontains=query)
+    ads = []
+
+    for ad in ads_qs:
+        imgs = AdImage.objects.filter(ad=ad.id)
+        data = {"ad": ad, "images": imgs}
+        ads.append(data)
+
+    artisans = Artisan.objects.filter(job__icontains=query)
+    post_qs = ForumPost.objects.filter(title__icontains=query)
+    posts = []
+    for post in post_qs:
+        comments = Comment.objects.filter(post=post)
+        comment_num = comments.count()
+        pos = {"post": post, "count": comment_num}
+        posts.append(pos)
+
+    context = {
+        "ads": ads,
+        "artisans": artisans,
+        # "count": comment_num,
+        "posts": posts,
+        "query": query
+    }
+    print(context)
+
+    return render(request, "searchResult.html", context)

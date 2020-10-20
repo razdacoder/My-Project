@@ -8,7 +8,31 @@ from main.models import *
 
 
 def index_view(request):
-    return render(request, 'index.html')
+    ads_qs = Ad.objects.all()[:8]
+    ads = []
+
+    for ad in ads_qs:
+        imgs = AdImage.objects.filter(ad=ad.id)
+        data = {"ad": ad, "images": imgs}
+        ads.append(data)
+
+    artisans = Artisan.objects.all()[:8]
+    post_qs = ForumPost.objects.all()[:8]
+    posts = []
+    for post in post_qs:
+        comments = Comment.objects.filter(post=post)
+        comment_num = comments.count()
+        pos = {"post": post, "count": comment_num}
+        posts.append(pos)
+
+    context = {
+        "ads": ads,
+        "artisans": artisans,
+        # "count": comment_num,
+        "posts": posts
+    }
+
+    return render(request, 'index.html', context)
 
 
 def register_view(request):
@@ -149,3 +173,18 @@ def edit_pass_view(request):
     else:
         messages.error(request, "Incorrect Password")
         return redirect("profile")
+
+
+def contact_view(request):
+    name = request.POST.get("fullname")
+    email = request.POST.get("email")
+    message = request.POST.get("message")
+
+    contact = Contact.objects.create(
+        name=name,
+        email=email,
+        message=message
+    )
+
+    contact.save()
+    return redirect("home")

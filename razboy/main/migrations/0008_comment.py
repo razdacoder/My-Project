@@ -3,6 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -16,10 +17,13 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.UUIDField(primary_key=True,
+                                        default=uuid.uuid4, editable=False)),
                 ('comment', models.CharField(max_length=1200)),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.ForumPost')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('post', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='main.ForumPost')),
+                ('user', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]
