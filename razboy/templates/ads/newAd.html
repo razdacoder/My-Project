@@ -11,7 +11,7 @@ Post Ad
     <form class="login-form" action="" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
         {% csrf_token %}
         <h3 class="form-heading">Post Ad</h3>
-        <div class="select-con">
+        <!-- <div class="select-con">
             <div class="selected">
                 <p>Select a category</p>
                 <i class="select-icon ion-chevron-down"></i>
@@ -49,6 +49,16 @@ Post Ad
                     <label for="home">Home and Kicthen</label>
                 </div>
             </div>
+        </div> -->
+        <div class="form-group">
+            <select name="select" id="">
+                <option value="computers">Computers and Accessories</option>
+                <option value="phones">Phones and Tablets</option>
+                <option value="electronic">Electronics</option>
+                <option value="babies">Kids and Toys</option>
+                <option value="cars">Cars</option>
+                <option value="home">Home and Kicthen</option>
+            </select>
         </div>
         <div class="form-group">
             <input type="text" placeholder="Title" name="title" required />

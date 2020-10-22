@@ -65,7 +65,7 @@ class AdImage(models.Model):
         output = BytesIO()
 
         # Resize/modify the image
-        im = im.resize((100, 100))
+        im = im.resize((1200, 900))
 
         # after modifications, save it to the output
         im.save(output, format='JPEG', quality=100)
@@ -129,7 +129,7 @@ class GalleryImage(models.Model):
         output = BytesIO()
 
         # Resize/modify the image
-        im = im.resize((500, 500))
+        im = im.resize((1200, 900))
 
         # after modifications, save it to the output
         im.save(output, format='JPEG', quality=100)

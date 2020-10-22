@@ -15,6 +15,7 @@ if (options) {
         o.addEventListener('click', () => {
             selectText.innerHTML = o.querySelector('label').innerHTML;
             optionList.classList.add('active')
+            console.log(o.querySelector('input').value)
         })
     })
 

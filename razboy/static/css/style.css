@@ -940,7 +940,8 @@ body {
 }
 
 .option input {
-  display: none;
+  display: hidden;
+  visibility: hidden;
 }
 
 .option label {
@@ -958,6 +959,15 @@ body {
   margin-bottom: 2rem;
 }
 
+
+.form-group select {
+  width: 100%;
+  padding: 1.7rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
 .imgs-group {
   width: 18%;
   height: 7rem;

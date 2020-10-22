@@ -64,7 +64,7 @@ def create_ad_view(request):
         image4 = request.FILES['post-images4']
         image5 = request.FILES['post-images5']
         images = [image1, image2, image3, image4, image5]
-        print(images)
+        print(cat)
         if boost == "on":
             boosted = True
         else:
